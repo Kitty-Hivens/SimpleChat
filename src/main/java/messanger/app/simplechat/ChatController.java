@@ -54,6 +54,7 @@ public class ChatController {
         });
 
         // Контекстное меню для поля ввода
+        // Context menu for input field
         ContextMenu fieldMenu = new ContextMenu();
         MenuItem pasteItem = new MenuItem("Paste");
         pasteItem.setOnAction(e -> messageField.paste());
@@ -64,6 +65,7 @@ public class ChatController {
         messageField.setContextMenu(fieldMenu);
 
         // Контекстное меню для сообщений
+        // Context menu for messages
         messageListView.setCellFactory(lv -> new ListCell<>() {
             @Override
             protected void updateItem(Message item, boolean empty) {
