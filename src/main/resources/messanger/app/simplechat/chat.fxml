@@ -30,8 +30,15 @@
             <padding>
                 <Insets bottom="10" left="10" right="10" />
             </padding>
-            <TextField fx:id="messageField" promptText="Enter message..." HBox.hgrow="ALWAYS" />
-            <Button fx:id="sendButton" text="Send" />
+            <TextArea fx:id="messageField"
+                      promptText="Enter message..."
+                      HBox.hgrow="ALWAYS"
+                      wrapText="true"
+                      prefRowCount="1"
+                      maxHeight="100"
+            />
+
+            <Button fx:id="sendButton" text="Send" onAction="#sendMessage"/>
         </HBox>
     </bottom>
 

@@ -11,4 +11,12 @@ public class Message {
         this.user = user;
         this.time = time;
     }
+
+    // TODO get/set
+
+    @Override
+    public String toString() {
+        return "[" + time + "] " + user.getUserName() + ": " + message;
+    }
+
 }
