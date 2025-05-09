@@ -30,16 +30,6 @@ public class Message {
         this.user = user;
     }
 
-
-
-    public User getUser() {
-        return user;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
     @Override
     public String toString() {
         return "[" + time + "] " + user.getUserName() + ": " + message;
