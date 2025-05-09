@@ -3,9 +3,7 @@ package messanger.app.simplechat;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.*;
 
 public class ChatController {
     private final ObservableList<Message> messageList = FXCollections.observableArrayList();
@@ -45,15 +43,57 @@ public class ChatController {
     public void initialize() {
         messageListView.setItems(messageList);
 
+        // ENTER / SHIFT+ENTER
         messageField.setOnKeyPressed(event -> {
             if (event.getCode() == javafx.scene.input.KeyCode.ENTER && !event.isShiftDown()) {
-                sendMessage(); // отправка при нажатии Enter без Shift
-                event.consume(); // предотвращаем добавление новой строки
+                sendMessage();
+                event.consume();
             } else if (event.getCode() == javafx.scene.input.KeyCode.ENTER) {
-                messageField.appendText("\n"); // вставка новой строки при Shift+Enter
+                messageField.appendText("\n");
+            }
+        });
+
+        // Контекстное меню для поля ввода
+        ContextMenu fieldMenu = new ContextMenu();
+        MenuItem pasteItem = new MenuItem("Paste");
+        pasteItem.setOnAction(e -> messageField.paste());
+        MenuItem clearItem = new MenuItem("Clear");
+        clearItem.setOnAction(e -> messageField.clear());
+        fieldMenu.getItems().addAll(pasteItem, clearItem);
+        fieldMenu.setOnShowing(e -> clearItem.setDisable(messageField.getText().isEmpty()));
+        messageField.setContextMenu(fieldMenu);
+
+        // Контекстное меню для сообщений
+        messageListView.setCellFactory(lv -> new ListCell<>() {
+            @Override
+            protected void updateItem(Message item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty || item == null) {
+                    setText(null);
+                    setContextMenu(null);
+                } else {
+                    setText("[" + item.getTime() + "] " + item.getUser().getUserName() + ": " + item.getMessage());
+
+
+                    ContextMenu msgMenu = new ContextMenu();
+
+                    MenuItem copyItem = new MenuItem("Copy");
+                    copyItem.setOnAction(e -> {
+                        javafx.scene.input.ClipboardContent content = new javafx.scene.input.ClipboardContent();
+                        content.putString(item.getMessage());
+                        javafx.scene.input.Clipboard.getSystemClipboard().setContent(content);
+                    });
+
+                    MenuItem deleteItem = new MenuItem("Delete");
+                    deleteItem.setOnAction(e -> messageList.remove(item));
+
+                    msgMenu.getItems().addAll(copyItem, deleteItem);
+                    setContextMenu(msgMenu);
+                }
             }
         });
     }
+
 
 
 

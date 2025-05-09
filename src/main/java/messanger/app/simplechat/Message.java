@@ -14,9 +14,21 @@ public class Message {
 
     // TODO get/set
 
+
+    public User getUser() {
+        return user;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
     @Override
     public String toString() {
         return "[" + time + "] " + user.getUserName() + ": " + message;
     }
 
+    public String getTime() {
+        return time;
+    }
 }
