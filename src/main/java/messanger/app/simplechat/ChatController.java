@@ -7,7 +7,7 @@ import javafx.scene.control.*;
 
 public class ChatController {
     private final ObservableList<Message> messageList = FXCollections.observableArrayList();
-    private User currentUser = new User("TEST", "pass", "email@example.com");
+    private User currentUser;
 
     @FXML
     public ListView<Message> messageListView;
