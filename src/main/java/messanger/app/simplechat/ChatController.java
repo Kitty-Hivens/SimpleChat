@@ -3,7 +3,15 @@ package messanger.app.simplechat;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
+import jfxtras.styles.jmetro.JMetro;
+import jfxtras.styles.jmetro.Style;
+
+import java.io.IOException;
 
 public class ChatController {
     private final ObservableList<Message> messageList = FXCollections.observableArrayList();
@@ -97,6 +105,29 @@ public class ChatController {
     }
 
 
+    @FXML
+    public void logout() {
+        currentUser = null;
+
+        Stage stage = (Stage) logoutButton.getScene().getWindow();
+        stage.close();
+
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("register.fxml"));
+            Parent root = loader.load();
+
+            Stage loginStage = new Stage();
+            loginStage.setTitle("Login");
+            loginStage.setScene(new Scene(root));
+
+            new JMetro(Style.LIGHT).setScene(loginStage.getScene());
+
+            loginStage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 
     public void setCurrentUser(User user) {

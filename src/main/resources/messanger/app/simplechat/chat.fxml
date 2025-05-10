@@ -13,7 +13,7 @@
             <padding>
                 <Insets left="10" top="10" />
             </padding>
-            <Button fx:id="logoutButton" text="Exit" />
+            <Button fx:id="logoutButton" text="Exit" onAction="#logout"/>
         </HBox>
     </top>
 
