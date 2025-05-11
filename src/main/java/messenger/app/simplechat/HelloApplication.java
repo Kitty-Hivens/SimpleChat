@@ -1,4 +1,4 @@
-package messanger.app.simplechat;
+package messenger.app.simplechat;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

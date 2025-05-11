@@ -1,4 +1,4 @@
-package messanger.app.simplechat;
+package messenger.app.simplechat;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

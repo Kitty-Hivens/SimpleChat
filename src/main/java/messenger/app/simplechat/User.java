@@ -1,4 +1,4 @@
-package messanger.app.simplechat;
+package messenger.app.simplechat;
 
 public class User {
     private String userName;
